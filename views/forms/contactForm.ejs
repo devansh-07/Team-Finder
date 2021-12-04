@@ -1,0 +1,43 @@
+<form action="" method="POST">
+    <div class="mb-4">
+        <div class="mb-4 border-bottom">
+            <h4>Contact us</h4>
+            <p>
+                Our team is dedicated to making this platform more user-friendly. Feel free to contact us for any queries/suggestions.
+            </p>
+        </div>
+        
+        <div class="row">
+            <div class="col">
+                <!-- Phone input -->
+                <div class="form-outline mb-3">
+                    <input class="form-control" id="NameInp" type="text" value="<%= user.name %>" disabled>
+                    <label class="form-label" for="NameInp">Name</label>
+                </div>
+            </div>
+            
+            <div class="col">
+                <!-- Website input -->
+                <div class="form-outline mb-3">
+                    <input class="form-control" id="EmailInp" type="email" value="<%= user.email %>" disabled>
+                    <label class="form-label" for="EmailInp">E-mail</label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Headline input -->
+        <div class="form-outline mb-3">
+            <input type="text" id="SubjectInp" class="form-control" />
+            <label class="form-label" for="SubjectInp">Subject</label>
+        </div>
+
+        <!-- About input -->
+        <div class="form-outline mb-3">
+            <textarea class="form-control" id="MsgInp" rows="6"></textarea>
+            <label class="form-label" for="MsgInp">Message</label>
+        </div>
+    </div>
+
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-custom-dark py-2 btn-block mb-4">Save</button>
+</form>

@@ -1,0 +1,237 @@
+
+<!-- For cloning -->
+<div class="d-none">
+    <div class="row mb-3" id="linkForm">
+        <div class="col">
+            <select class="browser-default bg-light custom-select" name="platforms">
+                <option value="">Select Platform/Website</option>
+                <% for (plat of platform_choices) { %>
+                    <option value="<%= plat %>">
+                        <%= plat %>
+                    </option>
+                <% } %>
+            </select>
+        </div>
+        
+        <div class="col">
+            <div class="form-outline">
+                <input class="text-custom-dark form-control" id="urlInp" type="url" name="url" value="">
+                <label class="form-label" for="urlInp">URL</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- For cloning -->
+<div class="d-none">
+    <div class="row">
+        <div class="col-md-2 mb-2" id="skillForm">
+            <div class="form-outline flexContainer">
+                <input class="inputField text-custom-dark form-control" placeholder="Skill" id="skillInp" type="text" name="skills" value="">
+                <!-- <button class="btn px-2" onclick="dltSkill()" style="box-shadow: none;">
+                    <i class="fas fa-remove"></i>
+                </button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<form action="/edit" method="post" enctype="multipart/form-data">
+    <div class="mb-4">
+        <h5 class="mb-3 border-bottom pb-2">Basic Details</h5>
+        
+        <div class="row">
+            <div class="col">
+                <!-- Phone input -->
+                <div class="form-outline mb-3">
+                    <span class="text-success text-center trailing">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                    <input class="text-custom-dark form-control" id="PhoneInp" type="text" name="phone" value="<%= profile.phone %>">
+                    <label class="form-label" for="PhoneInp">Phone Number</label>
+                </div>
+            </div>
+            
+            <div class="col">
+                <!-- Website input -->
+                <div class="form-outline mb-3">
+                    <input class="text-custom-dark form-control" id="WebsiteInp" type="url" name="website" value="<%= profile.website %>">
+                    <label class="form-label" for="PhoneInp">Website</label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Headline input -->
+        <div class="form-outline mb-3">
+            <input type="text" id="HeadlineInp" class="text-custom-dark form-control" name="headline" data-mdb-showcounter="true" maxlength="100" maxlength="100" value="<%= profile.headline %>"/>
+            <label class="form-label" for="HeadlineInp">Headline</label>
+            <small>
+                <div class="form-helper"></div>
+            </small>
+        </div>
+
+        <!-- Location input -->
+        <div class="form-outline mb-3">
+            <input type="text" id="LocationInp" class="text-custom-dark form-control" name="location" value="<%= profile.location %>"/>
+            <label class="form-label" for="LocationInp">Location</label>
+        </div>
+
+        <!-- About input -->
+        <div class="form-outline mb-3">
+            <textarea class="text-custom-dark form-control" id="AboutInp" name="about" rows="6" data-mdb-showcounter="true" maxlength="500"><%= profile.about %></textarea>
+            <label class="form-label" for="AboutInp">About me</label>
+            <small>
+                <div class="form-helper"></div>
+            </small>
+        </div>
+    </div>
+
+    <!-- Skills input -->
+    <div class="mb-4">
+        <div class="border-bottom pb-3 mb-3">
+            <div class="pb-1 pt-2 mb-3">
+                <div class="float-left">
+                    <h5 class="mb-0">Skills</h5>
+                </div>
+                <div class="float-right">
+                    <button type="button" id="addSkill" onclick="addnewSkill()" class="btn btn-custom-dark btn-sm">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" id="skillList">
+            <% for (skill of profile.skills) { %>
+                <div class="col-md-2 mb-2" id="skillForm">
+                    <div class="form-outline flexContainer">
+                        <input class="inputField text-custom-dark form-control" placeholder="Skill" id="skillInp" type="text" name="skills" value="<%= skill %>">
+                    </div>
+                </div>
+            <% } %>
+        </div>
+
+        <div class="text-center" id="noSkill">
+            <p class="text-secondary">No Skills.</p>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <div class="border-bottom pb-3 mb-3">
+            <div class="pb-1 pt-2 mb-3">
+                <div class="float-left">
+                    <h5 class="mb-0">Links</h5>
+                </div>
+                <div class="float-right">
+                    <button type="button" id="addLink" onclick="addnewLink()" class="btn btn-custom-dark btn-sm">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="linkList">
+            <% for (link of profile.links) { %>
+                <%- include("../partials/link_form_part.ejs", {link, platform_choices}) %>
+            <% } %>
+        </div>
+
+        <div class="text-center" id="noLink">
+            <p class="text-secondary">No Links.</p>
+        </div>
+
+    </div>
+
+    <div class="mb-4">
+        <h5 class="mb-3 border-bottom pb-2">Resume</h5>
+
+        <!-- Resume -->
+        <div class="mb-3">
+            <input type="file" class="text-custom-dark form-control" id="ResumeInp" accept="application/pdf" name="resume"/>
+            <% if (profile.resume) { %> 
+                <small>Current Resume: <a href="/files/<%= profile.resume %>"><%= profile.resume %></a></small>
+            <% } %> 
+        </div>
+    </div>
+
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-custom-dark py-2 btn-block">Save</button>
+</form>
+
+
+<script>
+    function updateLinkList() {
+        var linkList = document.getElementById("linkList");
+        var nolink = document.getElementById("noLink");
+        
+        if (linkList.childElementCount == 0) {
+            nolink.classList.remove("d-none");
+        } else {
+            nolink.classList.add("d-none");
+        }
+    }
+
+    function updateSkillList() {
+        var skillList = document.getElementById("skillList");
+        var noskill = document.getElementById("noSkill");
+        
+        if (skillList.childElementCount == 0) {
+            noskill.classList.remove("d-none");
+        } else {
+            noskill.classList.add("d-none");
+        }
+    }
+
+    function addnewLink() {
+        var linkList = document.getElementById("linkList");
+
+        if (linkList.childElementCount >= 5)
+            return;
+
+        var newlinkfields = document.getElementById("linkForm").cloneNode(true);
+
+        for (inp of newlinkfields.getElementsByTagName("input")) {
+            inp.value = "";
+            inp.classList.remove("active");
+        }
+
+        for (label of newlinkfields.getElementsByTagName("label")) {
+            label.classList.remove("active");
+        }
+
+        for (opt of newlinkfields.getElementsByTagName("option")) {
+            opt.removeAttribute("selected");
+        }
+
+        linkList.appendChild(newlinkfields);
+
+        updateLinkList();
+    }
+
+    function addnewSkill() {
+        var skillList = document.getElementById("skillList");
+
+        if (skillList.childElementCount >= 10)
+            return;
+
+        var newskillfields = document.getElementById("skillForm").cloneNode(true);
+
+        for (inp of newskillfields.getElementsByTagName("input")) {
+            inp.value = "";
+            inp.classList.remove("active");
+        }
+
+        skillList.appendChild(newskillfields);
+
+        updateSkillList();
+    }
+
+    function dltSkill(event) {
+        console.log("Works", event);
+    }
+
+    // addnewSkill();
+    updateLinkList();
+    updateSkillList();
+</script>

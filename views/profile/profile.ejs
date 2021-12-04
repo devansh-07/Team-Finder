@@ -1,0 +1,80 @@
+<div class="modal fade" id="inviteFormModal" tabindex="-1" aria-labelledby="inviteFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content py-4">
+            <div class="modal-header px-0 mx-4 py-2 border-bottom">
+                <h4 class="modal-title" id="inviteFormModalLabel">Invite for project</h4>
+                <button type="button" class="my-auto mr-1 btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <div class="modal-body p-0 mx-4">
+                <%- include("../forms/inviteForm.ejs", {user}) %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="border-bottom pb-2 mb-2">
+        <div class="pb-0 pt-2 mb-0">
+            <div class="">
+                <h3 class="">
+                    <span class="border-right pr-0 mr-3">
+                        <button style="background-color: transparent; border: 0;" onclick="window.history.back()">
+                            <i style="font-size: .9em;" class="fa fa-arrow-left"></i>
+                        </button>
+                    </span>
+                    <%= fuser.name.split(" ")[0] %>'s Profile
+                </h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <div class="">
+            <img src="<%= fuser.image %>" class="rounded-circle border my-5 w-50" style="max-width: 250px;"/>
+        </div>
+        
+        <!-- Name -->
+        <h2 class="card-title font-weight-bold"><%= fuser.name %></h2>
+
+        <!-- Headline -->
+        <h5 class="card-subtitle my-2"><%= fuser.profile.headline %></h5>
+
+        <!-- Location -->
+        <h6 class="card-subtitle text-muted my-2"><%= fuser.profile.location %></h6>
+        
+        <!-- Links -->
+        <%- include("../partials/links.ejs", {links: fuser.profile.links}) %>
+
+        <!-- About -->
+        <div class="text-center container">
+            <div class="container">
+                <p class="my-3"><%= fuser.profile.about %> </p>
+            </div>
+        </div>
+
+        <!-- Skills -->
+        <div class="py-3">
+            <% for (skill of fuser.profile.skills) { %>
+                <small class="tag rounded mr-2 px-2 py-1 my-2" style="font-size: .875em;"><%= skill %> </small>
+            <% } %>
+        </div>
+
+        <% if (!user._id.equals(fuser._id)) { %> 
+            <div class="pt-3 border-top">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <% if ((fuser.profile.resume) && (fuser.profile.isResumePublic)) { %> 
+                            <a href="/files/<%= fuser.profile.resume %>" target="_blank" class="a-btn btn btn-custom-dark m-2" style="min-width: 180px;">
+                                View Resume
+                            </a>
+                        <% } %> 
+                        <button class="a-btn btn btn-custom-dark m-2" style="min-width: 180px;" data-mdb-toggle="modal" data-mdb-target="#inviteFormModal">
+                            Send Invite
+                        </button>
+                    </div>
+                </div>
+            </div>
+        <% } %> 
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="card mx-0" style="width: 100%;">
+    <div class="card-body">
+        <div class="text-center">
+            <img src="<%= fuser.image %>" class="rounded-circle my-4 w-50"/>
+            
+            <!-- Name -->
+            <h4 class="card-title mb-2"><%= fuser.name %></h4>
+
+            <!-- Headline -->
+            <h6 class="card-subtitle mt-1 mb-2 text-muted"><%= fuser.profile.headline %></h6>
+
+            <!-- Links -->
+            <%- include("../partials/links.ejs", {links: fuser.profile.links}) %>
+
+            <!-- Skills -->
+            <% if (fuser.profile.skills.length > 0) { %>
+                <div class="py-2 border-top">
+                    <% for (skill of fuser.profile.skills) { %>
+                        <small class="tag rounded mx-1 my-1 px-2 py-1"><%= skill %></small>
+                    <% } %>
+                </div>
+            <% } %> 
+        </div>
+    </div>
+    
+    <div class="card-footer text-center py-3 border-top">
+        <div class="row">
+            <div class="col-md-6 col-xs-6">
+                <a href="/profile/<%= fuser.username %>" class="a-btn my-1 btn-sm btn btn-custom-dark btn-block">
+                    View Profile
+                </a>
+            </div>
+            <div class="col-md-6 col-xs-6">
+                <button class="a-btn my-1 btn-sm btn btn-custom-dark btn-block" data-userid="<%= fuser.username %>" data-mdb-toggle="modal" data-mdb-target="#inviteFormModal">
+                    Send Invite
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

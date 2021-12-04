@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <div class="border-bottom pb-3 mb-2">
+        <div class="pb-2 pt-2 mb-4">
+            <div class="float-left">
+                <h2 class="">Notifications</h2>
+            </div>
+            <div class="float-right">
+                <form action="/notifications/clear" method="post">
+                    <button type="submit" class="btn btn-custom-dark px-3" data-mdb-toggle="modal" data-mdb-target="#projectFormModal">
+                        Clear
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="my-3">
+        <% if (locals.notifications.length == 0) { %>
+            <div class="text-center my-4 mt-5">
+                <p class="text-secondary">No Notifications.</p>
+            </div>
+        <% } else { %> 
+            <% for (notification of notifications) { %>
+                <div class="alert alert-secondary border" role="alert" data-mdb-color="success">
+                    <h6 class="my-1"><%= notification.text %></h6>
+                    <small class="text-muted"><%= notification.createdAt.toUTCString() %></small>
+                </div>
+            <% } %>
+        <% } %> 
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<script>
+    function copyPrfLink() {
+        var cpbtn = document.getElementById("copyProfileLink");
+        navigator.clipboard.writeText(cpbtn.value);
+
+        cpbtn.innerHTML = '<i class="fa fa-check"></i>&nbsp;Copied';
+        cpbtn.classList.replace("btn-light", "text-success");
+    }
+</script>
+
+<div class="container-fluid">
+    <div>
+        <!-- #TODO: Copy complete profile link, hardcoded for now -->
+        
+        <% if ((user.profile.resume) && (user.profile.isResumePublic)) { %> 
+            <a href="/files/<%= user.profile.resume %>" target="_blank" class="a-btn btn btn-custom-dark float-left" style="box-shadow: none; min-width: 115px;">
+                <i class="fa fa-file"></i>&nbsp; Resume
+            </a>
+        <% } %>
+        <button class="btn btn-light float-right border" style="background-color: transparent; box-shadow: none; min-width: 115px;" value="<%= req.hostname %>:8000/profile/<%= user.username %>" onclick="copyPrfLink()" id="copyProfileLink">
+            <i class="fa fa-link"></i>&nbsp;Copy Link
+        </button>
+    </div>
+
+    <div class="text-center mt-5">
+        <div class="text-center">
+            <img src="<%= user.image %>" class="rounded-circle border my-5 w-50" style="max-width: 250px;"/>
+        </div>
+        
+        <!-- Name -->
+        <h2 class="card-title font-weight-bold"><%= user.name %></h2>
+
+        <!-- Headline -->
+        <h5 class="card-subtitle my-2"><%= user.profile.headline %></h5>
+
+        <!-- Location -->
+        <h6 class="card-subtitle text-muted my-2"><%= user.profile.location %></h6>
+        
+        <!-- Links -->
+        <%- include("../partials/links.ejs", {links: user.profile.links}) %> 
+
+        <!-- About -->
+        <p class="my-3"><%= user.profile.about %> </p>
+
+        <!-- Skills -->
+        <div class="py-3">
+            <% for (skill of user.profile.skills) { %>
+                <small class="tag rounded mr-2 px-2 py-1 my-2" style="font-size: .875em;"><%= skill %> </small>
+            <% } %>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="row mb-3" id="linkForm">
+    <div class="col">
+        <select class="browser-default bg-light custom-select" name="platforms">
+            <option value="">Select Platform/Website</option>
+            <% for (plat of locals.platform_choices) { %>
+                <option 
+                    value="<%= plat %>"
+                    <% if (locals.link.platform == plat) { %>
+                        selected
+                    <% } %>
+                >
+                    <%= plat %>
+                </option>
+            <% } %>
+        </select>
+    </div>
+    
+    <div class="col">
+        <div class="form-outline">
+            <input class="text-custom-dark form-control" id="urlInp" type="url" name="url" value="<%= link.url %>">
+            <label class="form-label" for="urlInp">URL</label>
+        </div>
+    </div>
+</div>

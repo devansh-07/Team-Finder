@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../base_partials/_header.ejs") %>
+
+    <body>
+        <div class="container-fluid p-0">
+            <%- include("../base_partials/_navbar.ejs") %>
+        </div>
+
+        <div class="container-fluid p-0">
+            <div class="m-0 p-0" style="position: relative;">
+                <div class="bg-dar" style="position: absolute; width:100%; z-index: -1; background-color: #262626; min-height: 15vh;">
+                
+                </div>
+
+                <div class="container home-container py-4">
+                    <div class="container-fluid p-0 m-0 my-4">
+                        <div class="row">
+                            
+                            <div class="col-md-12">
+                                <div class="container-fluid" style="border-radius: 8px;">
+                                    <div class="row py-4 px-3 border" style="box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2); background-color: #fbfbfb; border-radius: 8px;">
+                                        <div class="container home-container">
+                                            <div style="width: 100%;">
+                                                <div class="mx-auto p-0">
+                                                    <% const succ = req.flash("success"); %>
+                                                    <% const fail = req.flash("error"); %>
+                                                    <% const info = req.flash("info"); %>
+                                                    <% const warn = req.flash("warning"); %>
+                                                    
+                                                    <% for (msg of succ) { %>
+                                                        <div class="alert alert-success" role="alert" data-mdb-color="success">
+                                                            <%= msg %>
+                                                        </div>
+                                                    <% } %> 
+                                                    
+                                                    <% for (msg of warn) { %>
+                                                        <div class="alert alert-warning" role="alert" data-mdb-color="warning">
+                                                            <%= msg %>
+                                                        </div>
+                                                    <% } %> 
+
+                                                    <% for (msg of fail) { %>
+                                                        <div class="alert alert-danger" role="alert" data-mdb-color="danger">
+                                                            <%= msg %>
+                                                        </div>
+                                                    <% } %> 
+
+                                                    <% for (msg of info) { %>
+                                                        <div class="alert alert-info" role="alert" data-mdb-color="info">
+                                                            <%= msg %>
+                                                        </div>
+                                                    <% } %> 
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <%- body %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+    
+        <div class="container-fluid p-0">
+            <%- include("../base_partials/_footer.ejs") %>
+        </div>
+
+        <%- include("../base_partials/_scripts.ejs") %>
+    </body>
+</html>

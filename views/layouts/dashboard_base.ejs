@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../base_partials/_header.ejs") %>
+
+    <body>
+        <div class="container-fluid p-0">
+            <%- include("../base_partials/_navbar.ejs") %>
+        </div>
+
+        <div class="container-fluid p-0">
+            <div class="m-0 p-0" style="position: relative;">
+                <div class="bg-dar" style="position: absolute; width:100%; z-index: -1; background-color: #262626; min-height: 15vh;">
+                
+                </div>
+
+                <div class="container home-container py-4">
+                    <div class="container-fluid p-0 m-0 my-4">
+                        <div class="row">
+                            <div class="col-md-3 p-0 m-0">
+                                <div class="px-3">
+                                    <div class="mb-4 pb-3 border-bottom">
+                                        <div class="mb-3">
+                                            <img class="" style="border-radius: 10px; border: 3px solid #262626; max-width: 180px;" src="<%= user.image %>" alt="Profile pic" width="100%">
+                                        </div>
+                                    </div>
+                                
+                                    <ul class="menu pl-0 pr-0">
+                                        <li class="<% if (locals.act === "info"){ %>active <% } %>"><a href="/"><i class="fa fa-address-card"></i>&nbsp;&nbsp;Profile</a></li>
+                                        <li class="<% if (locals.act === "edit"){ %>active <% } %>"><a href="/edit"><i class="fa fa-edit"></i>&nbsp; Edit Profile</a></li>
+                                        <li class="<% if (locals.act === "proj"){ %>active <% } %>"><a href="/projects/"><i class="fas fa-project-diagram"></i>&nbsp; Projects</a></li>
+                                        <li class="<% if (locals.act === "invt"){ %>active <% } %>"><a href="/invites/"><i class="fas fa-user-plus"></i>&nbsp; Invites</a></li>
+                                        <li class="<% if (locals.act === "ntfy"){ %>active <% } %>"><a href="/notifications/"><i class="fa fa-bell"></i>&nbsp;&nbsp; Notifications</a></li>
+                                        <li class="<% if (locals.act === "ppl"){ %>active <% } %>"><a href="/people/"><i class="fas fa-user-friends	"></i>&nbsp; Find People</a></li>
+                                        <li class="<% if (locals.act === "chat"){ %>active <% } %>"><a href="/chat/"><i class="fas fa-comment"></i>&nbsp;&nbsp; Messages</a></li>
+                                        <li class=""><a class="text-danger" href="/auth/logout/"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp; Sign out</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-9">
+                                <div class="container-fluid" style="border-radius: 8px;">
+                                    <div class="row py-4 px-3 border bg-light" style="box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2); border-radius: 8px;">
+                                        <div class="container-fluid home-container">
+                                            <div style="width: 100%;">
+                                                <div class="mx-auto p-0">
+                                                    <% const succ = req.flash("success") %>
+                                                    <% const fail = req.flash("error") %>
+                                                    <% const info = req.flash("info") %>
+                                                    <% const warn = req.flash("warning") %>
+                                                    
+                                                    <% for (msg of succ) { %>
+                                                        <div class="alert alert-success" role="alert" data-mdb-color="success">
+                                                            <%= msg %>
+                                                        </div>
+                                                    <% } %> 
+                                                    
+                                                    <% for (msg of warn) { %>
+                                                        <div class="alert alert-warning" role="alert" data-mdb-color="warning">
+                                                            <%= msg %>
+                                                        </div>
+                                                    <% } %> 
+
+                                                    <% for (msg of fail) { %>
+                                                        <div class="alert alert-danger" role="alert" data-mdb-color="danger">
+                                                            <%= msg %>
+                                                        </div>
+                                                    <% } %> 
+
+                                                    <% for (msg of info) { %>
+                                                        <div class="alert alert-info" role="alert" data-mdb-color="info">
+                                                            <%= msg %>
+                                                        </div>
+                                                    <% } %> 
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <%- body %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+    
+        <div class="container-fluid p-0">
+            <%- include("../base_partials/_footer.ejs") %>
+        </div>
+
+        <%- include("../base_partials/_scripts.ejs") %>
+    </body>
+</html>

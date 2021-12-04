@@ -1,0 +1,55 @@
+<div class="modal fade" id="inviteFormModal" tabindex="-1" aria-labelledby="inviteFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content py-4">
+            <div class="modal-header px-0 mx-4 py-2 border-bottom">
+                <h4 class="modal-title" id="inviteFormModalLabel">Invite for project</h4>
+                <button type="button" class="my-auto mr-1 btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <div class="modal-body p-0 mx-4">
+                <%- include("../forms/inviteForm.ejs", {user, fuser: user}) %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var modal = document.getElementById("inviteFormModal");
+
+    modal.addEventListener('show.bs.modal', function(event) {
+        var uId = $(event.relatedTarget).data('userid');
+        $("#inviteForm").attr('action', "/invite/" + uId);
+        console.log($("#inviteForm").attr('action'));
+    });
+</script>
+
+<div class="border-bottom pb-2 mb-3">
+    <div class="pb-3 pt-2 mb-4">
+        <div class="float-left">
+            <h3>
+                <span class="border-right pr-0 mr-3">
+                    <button style="background-color: transparent; border: 0;" onclick="window.history.back()">
+                        <i style="font-size: .9em;" class="fa fa-arrow-left"></i>
+                    </button>
+                </span>
+                <span class="">Find People</span>
+            </h3>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <% if (allfusers.length == 0) { %>
+            <div class="text-center my-4 mt-5">
+                <p class="text-secondary">No user is currently open to collab.</p>
+            </div>
+        <% } else { %>
+            <% for (fuser of allfusers) { %>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 py-2 pb-4 d-flex align-items-stretch">
+                    <%- include("../partials/profilecard.ejs", {fuser}) %>
+                </div>
+            <% } %>
+        <% } %>
+    </div>
+</div>

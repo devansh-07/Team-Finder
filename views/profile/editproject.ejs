@@ -1,0 +1,14 @@
+<div class="py-2">
+    <div class="border-bottom pb-2 mb-3">
+        <h3>
+            <span class="border-right pr-0 mr-3">
+                <button style="background-color: transparent; border: 0;" onclick="window.history.back()">
+                    <i style="font-size: .9em;" class="fa fa-arrow-left"></i>
+                </button>
+            </span>
+            Edit Project Details
+        </h3>
+    </div>
+
+    <%- include("../forms/projectForm.ejs", {proj: project, submitText: "Save", updateForm: true}) %>
+</div>

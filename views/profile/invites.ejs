@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <ul class="nav nav-tabs nav-justified r-0 p-0 mb-3" id="ex1" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="sent-invites" data-mdb-toggle="tab" href="#sent-invites-a" role="tab"
+                aria-controls="sent-invites-a" aria-selected="true">
+                <span style="font-size: 1.2em;">
+                    Sent
+                    <% if (sent_inv.length > 0) { %>
+                        <span class="ml-1 badge badge-notification bg-dark">
+                            <%= sent_inv.length %>
+                        </span>
+                    <% } %>
+                </span>
+            </a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="rcvd-invites" data-mdb-toggle="tab" href="#rcvd-invites-a" role="tab"
+                aria-controls="rcvd-invites-a" aria-selected="false">
+                <span style="font-size: 1.2em;">
+                    Received
+                    <% if (received_inv.length > 0) { %>
+                        <span class="ml-1 badge  badge-notification bg-dark">
+                            <%= received_inv.length %>
+                        </span>
+                    <% } %>
+                </span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="ex2-content">
+        <div class="tab-pane fade show active" id="sent-invites-a" role="tabpanel" aria-labelledby="sent-invites">
+            <% if (sent_inv.length == 0) { %>
+                <div class="text-center my-4 mt-5">
+                    <p class="text-secondary">You haven't sent any invites.</p>
+                </div>
+            <% } else { %>
+                <% for (inv of sent_inv) { %>
+                    <%- include("../partials/sent_invite_card.ejs", {fuser: inv.to, invite: inv}) %> 
+                <% } %>
+            <% } %>
+        </div>
+
+        <div class="tab-pane fade" id="rcvd-invites-a" role="tabpanel" aria-labelledby="rcvd-invites">
+            <% if (received_inv.length == 0) { %>
+                <div class="text-center my-4 mt-5">
+                    <p class="text-secondary">You haven't received any invites.</p>
+                </div>
+            <% } else { %>
+                <% for (inv of received_inv) { %>
+                    <%- include("../partials/received_invite_card.ejs", {fuser: inv.from, invite: inv}) %>                     
+                <% } %>
+            <% } %>
+        </div>
+    </div>    
+</div>

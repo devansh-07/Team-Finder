@@ -1,0 +1,31 @@
+<form id="inviteForm" action="/invite/<%= fuser.username %>" method="POST">
+    <div class="my-3">
+        <% if (user.projects.length == 0) { %>
+            <div class="alert alert-warning border-0 py-3" role="alert" data-mdb-color="danger">
+                You don't have any project. Create one <a class="anchor" href="/projects">here</a>.
+            </div>
+        <% } %>
+        
+        <!-- Name input -->
+        <select class="mb-3 browser-default custom-select" name="projid" required>
+            <option value="">Select Project</option>
+            <% for (project of user.projects) { %>
+                <option value="<%= project._id %>"> <%= project.name %> </option>
+            <% } %> 
+        </select>
+
+        <!-- Message input -->
+        <div class="form-outline mb-3">
+            <textarea class="text-custom-dark form-control" id="MsgInp" rows="8" name="message" data-mdb-showcounter="true" maxlength="500"></textarea>
+            <label class="form-label" for="MsgInp">Message</label>
+            <small>
+                <div class="form-helper"></div>
+            </small>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-custom-dark py-2 btn-block" <% if (user.projects.length == 0) { %> disabled <% } %>>
+        Send
+        <i class="fa fa-send"></i>
+    </button>
+</form>

@@ -1,0 +1,45 @@
+<form action="" method="POST">
+    <% if (locals.updateForm) { %>
+        <input type="hidden" name="_method" value="PUT">    
+    <% } %>
+    
+    <div class="my-3">
+        <!-- Name input -->
+        <div class="form-outline mb-3">
+            <input type="text" id="NameInp" class="text-custom-dark form-control" name="name" data-mdb-showcounter="true" maxlength="50" <% if (locals.proj){ %>value="<%= proj.name %>"<% } %>/>
+            <label class="form-label" for="NameInp">Project name</label>
+            <small>
+                <div class="form-helper"></div>
+            </small>
+        </div>
+
+        <!-- Link input -->
+        <div class="form-outline mb-3">
+            <input type="text" id="LiveLinkUrl" class="text-custom-dark form-control" name="liveUrl" <% if (locals.proj){ %>value="<%= proj.liveUrl %>"<% } %>/>
+            <label class="form-label" for="LiveLinkUrl">Live link</label>
+        </div>
+
+        <!-- Code URL input -->
+        <div class="form-outline mb-3">
+            <input type="text" id="CodeLinkUrl" class="text-custom-dark form-control" name="codeUrl" <% if (locals.proj){ %>value="<%= proj.codeUrl %>"<% } %>/>
+            <label class="form-label" for="CodeLinkUrl">Link to source code</label>
+        </div>
+
+        <!-- Tech Stack input -->
+        <div class="form-outline mb-3">
+            <input type="text" id="TechStack" class="text-custom-dark form-control" aria-describedby="textExample1" name="technologies" <% if (locals.proj){ %>value="<%= proj.technologies %>"<% } %>/>
+            <label class="form-label" for="TechStack">Technologies (Comma separated)</label>
+        </div>
+
+        <!-- About input -->
+        <div class="form-outline mb-4">
+            <textarea class="text-custom-dark form-control" id="DescInp" rows="8" data-mdb-showcounter="true" maxlength="800" name="description"><% if (locals.proj){ %><%= proj.description %><% } %></textarea>
+            <label class="form-label" for="DescInp">Description</label>
+            <small>
+                <div class="form-helper"></div>
+            </small>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-custom-dark py-2 btn-block"><% if (locals.submitText){ %><%= submitText %><% } else { %>Submit<% } %></button>
+</form>
