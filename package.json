@@ -23,7 +23,8 @@
     "passport-google-oauth": "^2.0.0",
     "passport-linkedin": "^1.0.0",
     "passport-linkedin-oauth2": "^2.0.0",
-    "toastr": "^2.1.4"
+    "toastr": "^2.1.4",
+    "vercel": "^23.1.2"
   },
   "scripts": {
     "start": "cross-env NODE_ENV=prod node app.js",
