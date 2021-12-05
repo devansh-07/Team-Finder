@@ -1,6 +1,6 @@
 {
-  "name": "findsimran",
-  "version": "1.0.0",
+  "name": "teamfinder07",
+  "version": "1.0.1",
   "description": "Find your project partner",
   "main": "app.js",
   "dependencies": {
