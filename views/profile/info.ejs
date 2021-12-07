@@ -17,7 +17,7 @@
                 <i class="fa fa-file"></i>&nbsp; Resume
             </a>
         <% } %>
-        <button class="btn btn-light float-right border" style="background-color: transparent; box-shadow: none; min-width: 115px;" value="<%= req.hostname %>:8000/profile/<%= user.username %>" onclick="copyPrfLink()" id="copyProfileLink">
+        <button class="btn btn-light float-right border" style="background-color: transparent; box-shadow: none; min-width: 115px;" value="<%= req.headers.host %>/profile/<%= user.username %>" onclick="copyPrfLink()" id="copyProfileLink">
             <i class="fa fa-link"></i>&nbsp;Copy Link
         </button>
     </div>
