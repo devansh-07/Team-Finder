@@ -44,7 +44,12 @@
 <script>
     function copyPrfLink() {
         var cpbtn = document.getElementById("copyProfileLink");
-        navigator.clipboard.writeText(cpbtn.value);
+
+        if(!navigator.clipboard) {
+            navigator.clipboard.writeText(cpbtn.value);
+        } else {
+            window.prompt("Copy to clipboard: Ctrl+C, Enter", cpbtn.value);
+        }
 
         cpbtn.innerHTML = '<i class="fa fa-check"></i>&nbsp;Copied';
         cpbtn.classList.replace("btn-light", "text-success");
