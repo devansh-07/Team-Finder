@@ -45,7 +45,7 @@
     function copyPrfLink() {
         var cpbtn = document.getElementById("copyProfileLink");
 
-        if(!navigator.clipboard) {
+        if(navigator.clipboard) {
             navigator.clipboard.writeText(cpbtn.value);
         } else {
             window.prompt("Copy to clipboard: Ctrl+C, Enter", cpbtn.value);
